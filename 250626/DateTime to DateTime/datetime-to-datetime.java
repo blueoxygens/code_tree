@@ -8,7 +8,7 @@ public class Main {
         // Please write your code here.
         if(A<11){
             System.out.println(-1);
-        }else if(A==11&&((11*60+11)-(B*60+C)<0)){
+        }else if(A==11&&((11*60+11)-(B*60+C)>0)){
             System.out.println(-1);
         }else{
             int result = -(11*60+11);
