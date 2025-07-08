@@ -13,7 +13,7 @@ public class Main {
             words[i] = sc.next();
         }
         // Please write your code here.
-        String REG_EXP = "^ap\\w*$";
+        String REG_EXP = "^"+t+"\\w*$";
         ArrayDeque<String>dq = new ArrayDeque<String>();
         for(String word: words){
             if(Pattern.matches(REG_EXP, word)){
