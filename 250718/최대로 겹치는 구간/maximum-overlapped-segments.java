@@ -16,7 +16,7 @@ public class Main {
         range[0] = Arrays.stream(x1).min().getAsInt();
         range[1] = Arrays.stream(x2).max().getAsInt();
         
-        for(int i =range[0]; i<range[1]; i++){
+        for(int i =range[0]; i<=range[1]; i++){
             int count = 0;
             for(int j=0; j<n; j++){
                 if(x1[j]<=i && x2[j]>=i){
