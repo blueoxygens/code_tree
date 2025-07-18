@@ -19,7 +19,7 @@ public class Main {
         for(int i =range[0]; i<=range[1]; i++){
             int count = 0;
             for(int j=0; j<n; j++){
-                if(x1[j]<=i && x2[j]>=i){
+                if(x1[j]<=i && x2[j]>=i || x1[j]>=i && x2[j]<=i){
                     count += 1;
                 }
             }
