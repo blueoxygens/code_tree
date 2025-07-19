@@ -31,7 +31,7 @@ public class Main {
                     temp++;
                 }
                 ans += len -1;
-                i = temp;
+                i = temp ++;
             }
         }
         System.out.println(ans);
