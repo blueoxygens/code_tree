@@ -1,35 +1,45 @@
 import java.util.Scanner;
-import java.util.Arrays;
 
 public class Main {
+    public static final int MAX_N = 100;
+    public static final int MAX_R = 200;
+    public static final int OFFSET = 100;
+
+    public static int n;
+    public static int[] x1 = new int[MAX_N];
+    public static int[] x2 = new int[MAX_N];
+
+    public static int[] checked = new int[MAX_R + 1];
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
 
-        int[] starts = new int[n];
-        int[] ends = new int[n];
+        // 입력
+        n = sc.nextInt();
 
-        for (int i = 0; i < n; i++) {
-            int a = sc.nextInt();
-            int b = sc.nextInt();
-            starts[i] = Math.min(a, b); // 항상 작은 값이 시작
-            ends[i] = Math.max(a, b);   // 큰 값이 끝
+        for(int i = 0; i < n; i++) {
+            x1[i] = sc.nextInt();
+            x2[i] = sc.nextInt();
+
+            // OFFSET을 더해줍니다.
+            x1[i] += OFFSET;
+            x2[i] += OFFSET;
         }
 
-        int minPoint = Arrays.stream(starts).min().getAsInt();
-        int maxPoint = Arrays.stream(ends).max().getAsInt();
-        int maxOverlap = 0;
-
-        for (int i = minPoint; i <= maxPoint; i++) {
-            int count = 0;
-            for (int j = 0; j < n; j++) {
-                if (starts[j] >= i && i <= ends[j]) {
-                    count++;
-                }
-            }
-            maxOverlap = Math.max(maxOverlap, count);
-        }
-
-        System.out.println(maxOverlap);
+        // 구간을 칠해줍니다.
+        // 구간 단위로 진행하는 문제이므로
+        // x2[i]에 등호가 들어가지 않음에 유의합니다.
+        for(int i = 0; i < n; i++)
+            for(int j = x1[i]; j < x2[i]; j++)
+                checked[j]++;
+        
+        // 최댓값을 구합니다.
+        int max = 0;
+        for(int i = 0; i <= MAX_R; i++)
+            if(checked[i] > max)
+                max = checked[i];
+        
+        // 출력
+        System.out.print(max);
     }
 }
