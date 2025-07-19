@@ -28,10 +28,10 @@ public class Main {
                 int temp = i;
                 while(field[temp] >=2){
                     len += 1;
-                    temp++;
+                    ++ temp;
                 }
                 ans += len -1;
-                i = temp ++;
+                i = ++ temp;
             }
         }
         System.out.println(ans);
