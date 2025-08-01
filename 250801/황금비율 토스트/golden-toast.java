@@ -35,8 +35,10 @@ public class Main {
                     }
                     break;
                 case "D":
-                    it.next();
-                    it.remove();
+                    if(it.hasNext()){
+                        it.next();
+                        it.remove();
+                    }
                     break;
                 default:
                     break;
