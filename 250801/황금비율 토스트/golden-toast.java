@@ -3,60 +3,50 @@ import java.util.LinkedList;
 import java.util.ListIterator;
 
 public class Main {
+    public static int n, m;
+    public static String s;
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        
-        int n = sc.nextInt();
-        int m = sc.nextInt();
-        char[] s = sc.next().trim().toCharArray();
-        sc.nextLine();
-        LinkedList<Character> list = new LinkedList<>();
-        for(char c : s){
-            list.add(c);
-        }
 
-        ListIterator<Character> it = list.listIterator(list.size());
+        // 입력:
+        n = sc.nextInt();
+        m = sc.nextInt();
+        s = sc.next();
 
-        for (int i = 0; i < m; i++) {
-            String[] command = sc.nextLine().trim().split(" ");
-            switch (command[0]){
-                case "L":
-                    if(it.hasPrevious()){
-                        it.previous();
-                    }
-                    break;
-                case "P":
-                    it.add(command[1].charAt(0));
-                    // System.out.println(command[1].charAt(0));
-                    break;
-                case "R":
-                    if(it.hasNext()){
-                        it.next();
-                    }
-                    break;
-                case "D":
-                    if(it.hasNext()){
-                        it.next();
-                        it.remove();
-                    }
-                    break;
-                default:
-                    break;
+        // 연결리스트 정의
+        LinkedList<Character> l = new LinkedList<>();
+        for(int i = 0; i < s.length(); i++)
+			l.add(s.charAt(i));
+        // Iterator 정의 (맨 끝 위치에서 시작하기 위해서는 listIterator안에 l.size() 필요)
+        ListIterator<Character> it = l.listIterator(l.size());
+
+        while(m-- > 0) {
+            char command = sc.next().charAt(0);
+
+            if(command == 'L') {
+                if(it.hasPrevious()) // 빵들의 맨 앞이 아니라면
+                    it.previous();   // 앞으로 이동합니다.
+            } 
+            else if(command == 'R') {
+                if(it.hasNext())     // 빵들의 맨 뒤가 아니라면
+                    it.next();       // 뒤로 이동합니다.
             }
+            else if(command == 'D') {
+                if(it.hasNext()) {   // 빵들의 맨 뒤가 아니라면
+                    it.next();
+                    it.remove();     // 바로 뒤에 있는 빵을 제거합니다.
+                }
+            }
+            else if(command == 'P') {
+                char c = sc.next().charAt(0);
+                it.add(c);           // 가리키는 위치에 문자 c를 추가합니다.
+            }    
         }
-        StringBuilder sb = new StringBuilder();
-        for (char c : list) sb.append(c);
-        System.out.println(sb.toString());
 
-        // System.out.print(list.toString().trim().replaceAll(",","").replace("[","").replace("]","").replaceAll(" ", ""));
-        // it = list.listIterator();
-        // while(it.hasNext()){
-        //     System.out.print(it.next());
-        // }
-        
-        // Please write your code here.
-
-        //L 앞으로, R 뒤로, 뒤에 있는 요소 삭제, P &는 &라는 문자가 적혀있는 식빵을 추가 
-        
+        // 출력:
+        it = l.listIterator();
+        while(it.hasNext())
+            System.out.print(it.next());
     }
 }
