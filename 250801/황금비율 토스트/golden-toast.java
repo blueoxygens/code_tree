@@ -44,7 +44,11 @@ public class Main {
                     break;
             }
         }
-        System.out.print(list.toString().trim().replaceAll(",","").replace("[","").replace("]","").replaceAll(" ", ""));
+        StringBuilder sb = new StringBuilder();
+        for (char c : list) sb.append(c);
+        System.out.println(sb.toString());
+
+        // System.out.print(list.toString().trim().replaceAll(",","").replace("[","").replace("]","").replaceAll(" ", ""));
         // it = list.listIterator();
         // while(it.hasNext()){
         //     System.out.print(it.next());
