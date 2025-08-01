@@ -44,10 +44,11 @@ public class Main {
                     break;
             }
         }
-        it = list.listIterator();
-        while(it.hasNext()){
-            System.out.print(it.next());
-        }
+        System.out.print(list.toString().trim().replaceAll(",","").replace("[","").replace("]","").replaceAll(" ", ""));
+        // it = list.listIterator();
+        // while(it.hasNext()){
+        //     System.out.print(it.next());
+        // }
         
         // Please write your code here.
 
