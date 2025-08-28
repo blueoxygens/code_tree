@@ -1,52 +1,75 @@
 import java.util.Scanner;
 import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Set;
-import java.util.HashSet;
-import java.util.Arrays;
 
 public class Main {
-    
-    static int [] dy = {1,-1,0,0};
-    static int [] dx = {0,0,1,-1};
+
+    // 좌표를 저장할 간단한 내부 클래스 (String 처리보다 훨씬 효율적)
+    static class Point {
+        int y, x;
+
+        public Point(int y, int x) {
+            this.y = y;
+            this.x = x;
+        }
+    }
+
+    static int[] dy = {1, -1, 0, 0};
+    static int[] dx = {0, 0, 1, -1};
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
         int m = sc.nextInt();
         int[][] grid = new int[n][m];
-        for (int i = 0; i < n; i++)
-            for (int j = 0; j < m; j++)
+        boolean[][] visited = new boolean[n][m]; // 2차원 배열로 visited 관리
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
                 grid[i][j] = sc.nextInt();
-        // Please write your code here.
-        Set<String> visited = new HashSet<>();
-        // 방문 기록
-        ArrayDeque<String> queue = new ArrayDeque<>();
-        // 큐
-        boolean flag = false;
-        queue.addLast(0+","+0);
+            }
+        }
 
-        while(!queue.isEmpty()){
-            String target = queue.pollFirst();
-            int[] cord = Arrays.stream(target.split(","))
-                            .mapToInt(Integer::parseInt)
-                            .toArray();
-            
-            for(int i = 0; i < 4; i++){
-                int new_y = cord[0]+dy[i];
-                int new_x = cord[1]+dx[i];
+        // 시작점이 벽이면 바로 0 출력 후 종료
+        if (grid[0][0] == 0) {
+            System.out.println(0);
+            return;
+        }
 
-                if(new_y >= 0 && new_y < m && new_x >=0 && new_x < n && grid[new_y][new_x] == 1 && !visited.contains(new_y+","+new_x)){
-                    queue.addLast(new_y+","+new_x);
-                    if(new_y == m-1 && new_x == n-1){
-                        flag = true;
-                        break;
-                    }
+        ArrayDeque<Point> queue = new ArrayDeque<>();
+        
+        // 시작점 큐에 추가 및 방문 처리
+        queue.addLast(new Point(0, 0));
+        visited[0][0] = true;
+
+        while (!queue.isEmpty()) {
+            Point current = queue.pollFirst();
+            int y = current.y;
+            int x = current.x;
+
+            // 목적지에 도달했는지 확인
+            if (y == n - 1 && x == m - 1) {
+                System.out.println(1);
+                return; // 목적지 찾았으므로 즉시 종료
+            }
+
+            for (int i = 0; i < 4; i++) {
+                int new_y = y + dy[i];
+                int new_x = x + dx[i];
+
+                // 1. 경계 조건 확인 (n과 m이 올바르게 수정됨)
+                // 2. 갈 수 있는 길인지(== 1) 확인
+                // 3. 아직 방문하지 않았는지 확인
+                if (new_y >= 0 && new_y < n && new_x >= 0 && new_x < m &&
+                    grid[new_y][new_x] == 1 && !visited[new_y][new_x]) {
+                    
+                    // ✨ 최적화: 큐에 추가할 때 바로 방문 처리
+                    visited[new_y][new_x] = true;
+                    queue.addLast(new Point(new_y, new_x));
                 }
             }
-            if(flag) break;
-            visited.add(target);
         }
-        System.out.println(flag?1:0);
+
+        // 큐가 비워질 때까지 목적지에 도달하지 못했다면 경로 없음
+        System.out.println(0);
     }
 }
