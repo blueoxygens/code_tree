@@ -38,13 +38,13 @@ public class Main {
 
                 if(new_y >= 0 && new_y < m && new_x >=0 && new_x < n && grid[new_y][new_x] == 1 && !visited.contains(new_y+","+new_x)){
                     queue.addLast(new_y+","+new_x);
+                    if(new_y == m-1 && new_x == n-1){
+                        flag = true;
+                        break;
+                    }
                 }
             }
-
-            if(cord[0] == m-1 && cord[1] == n-1){
-                flag = true;
-                break;
-            }
+            if(flag) break;
             visited.add(target);
         }
         System.out.println(flag?1:0);
