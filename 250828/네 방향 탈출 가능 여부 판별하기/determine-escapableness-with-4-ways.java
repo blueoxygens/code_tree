@@ -43,6 +43,7 @@ public class Main {
 
             if(cord[0] == m-1 && cord[1] == n-1){
                 flag = true;
+                break;
             }
             visited.add(target);
         }
