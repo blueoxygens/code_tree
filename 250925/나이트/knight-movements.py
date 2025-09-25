@@ -14,12 +14,17 @@ def bfs():
     q = deque()
     q.append((r2,c2))
     while q:
+        endf = False
         r, c = q.popleft()
         for dr, dc in directions:
             nr, nc = r + dr, c + dc
             if 1<= nr <= n and 1 <= nc <= n and (nr,nc) not in visited :
                 q.append((nr,nc))
-                memo[nr][nc] = min(memo[r][c] + 1, memo[nr][nc])
+                memo[nr][nc] = memo[r][c] + 1
+                if nr == r1 and nc == c1:
+                    endf = True
+        if endf:
+            break
         visited.add((r,c))
 
 bfs()
