@@ -23,12 +23,13 @@ def bfs():
                 memo[nr][nc] = memo[r][c] + 1
                 if nr == r1 and nc == c1:
                     endf = True
+                    break
         if endf:
             break
         visited.add((r,c))
 
 bfs()
-
+# print(memo)
 if memo[r1][c1] == math.inf:
     print(-1)
 else:
