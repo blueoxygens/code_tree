@@ -13,8 +13,9 @@ def bfs():
     visited = set()
     q = deque()
     q.append((r2,c2))
+    endf = False
+    
     while q:
-        endf = False
         r, c = q.popleft()
         for dr, dc in directions:
             nr, nc = r + dr, c + dc
