@@ -30,7 +30,22 @@ def bfs():
                 q.append((nr,nc, lv+1))
         visited.add((r,c))
     return math.inf
-                
+
+def nCr(arr, k):
+    result = []
+
+    def backtracking(start, path):
+        if len(path)==k:
+            result.append(path[:])
+            return
+        for i in range(start, len(arr)):
+            path.append(arr[i])
+            backtracking(i+1, path)
+            path.pop()
+    
+    backtracking(0,[])
+    return result
+    
 
 walls = []
 
@@ -40,14 +55,15 @@ for r in range (n):
             walls.append((r,c))
 
 ans = math.inf
+ans_list = nCr(walls, k)
+# print(ans_list)
 
-for i in range(len(walls)):
-    for j in range(i+1, len(walls)):
-        y1, x1 = walls[i]
-        y2, x2 = walls[j]
-        grid[y1][x1], grid[y2][x2] = 0, 0
-        ans = min(ans, bfs())
-        grid[y1][x1], grid[y2][x2] = 1, 1
+for item in ans_list:
+    for y,x in item:
+        grid[y][x] = 0
+    ans = min(ans, bfs())
+    for y,x in item:
+        grid[y][x] = 1
 
 if ans == math.inf:
     print(-1)
