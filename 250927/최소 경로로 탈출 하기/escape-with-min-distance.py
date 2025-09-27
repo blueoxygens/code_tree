@@ -23,7 +23,7 @@ def bfs():
                 if ny == n-1 and nx == m-1:
                     return lv+1
                 q.append((ny,nx, lv+1))
-                visited[y][x] == True
+                visited[y][x] = True
     return -1
 
 print(bfs())       
