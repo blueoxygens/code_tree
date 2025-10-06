@@ -13,11 +13,13 @@ def find_pairs():
             return
         
         for i in range(start, n):
-            picked.append(i)
+            picked.append(arr[i])
+            # print(picked)
             bt(i+1, picked)
             picked.pop()
     
-    bt(0, ans)
+    bt(0, [])
+    # print(ans)
     return len(ans)
 
 print(find_pairs())
