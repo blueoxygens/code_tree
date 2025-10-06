@@ -4,12 +4,6 @@ arr = list(map(int, input().split()))
 
 # Please write your code here.
 c = Counter(arr)
-
-target_value = list(c.values())[0]
-
-result = sorted(
-    [i for i in c if c[i] == target_value],
-    key=lambda x: -int(x)
-)
-
-print(' '.join(map(str,result)))
+l = sorted(list(c.keys()), key=lambda x: (-c[x], -x))
+for i in range(k):
+    print(l[i], end=" ")
