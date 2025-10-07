@@ -1,12 +1,14 @@
 from collections import deque
+import heapq
 
 n, m = map(int, input().split())
 arr = list(map(int, input().split()))
-
+q =[]
 # Please write your code here.
-q = deque(sorted(arr, key = lambda x :-x))
+for i in arr:
+    heapq.heappush(q, -i)
+# heapq.heappush()
 for _ in range(m):
-    q.append(q.popleft()-1)
-    q = deque(sorted(q, key = lambda x :-x))
+    heapq.heappush(q, heapq.heappop(q)+1)
 
-print(q.popleft())
+print(-heapq.heappop(q))
