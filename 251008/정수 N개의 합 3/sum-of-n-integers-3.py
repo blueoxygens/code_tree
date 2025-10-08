@@ -12,8 +12,5 @@ for i in range(1, n+1):
 ans = 0
 for i in range(k,n+1):
     for j in range(k,n+1):
-        if k > 1:
-            ans = max(ans, ps[i][j] - ps[i-k][j] - ps[i][j-k] + arr[1][1])
-        else:
-            ans = max(ans, ps[i][j] - ps[i-k][j] - ps[i][j-k])
+        ans = max(ans, ps[i][j] - ps[i-k][j] - ps[i][j-k] + arr[i-k][j-k])
 print(ans)
