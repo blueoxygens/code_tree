@@ -10,6 +10,6 @@ for i in range(1, n+1):
 #투 포인터?
 ans = 0
 # print(dp)
-for i in range(k+1, n+1):
-    ans = max(ans, dp[i]-min(dp[i-k:i]))
+for i in range(k, n+1):
+    ans = max(ans, dp[i]-dp[i-k])
 print(ans)
