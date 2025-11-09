@@ -15,7 +15,7 @@ while move:
     for dr, dc in d:
         nr = r + dr
         nc = c + dc
-        if 0<= nr < n and 0 <= nc < n and a[nr][nc] > a[r][c]:
+        if 0<= nr < n+1 and 0 <= nc < n+1 and a[nr][nc] > a[r][c]:
             record.append(a[nr][nc])
             r = nr
             c = nc
