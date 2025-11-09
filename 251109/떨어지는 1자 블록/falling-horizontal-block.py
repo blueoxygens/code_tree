@@ -14,6 +14,9 @@ if n > 1:
         else:
             continue
         break
+    else:
+        for j in range (k-1, k+m-1):
+            grid[n-1][j] = 1
 else:
     for j in range (k-1, k+m-1):
         grid[0][j] = 1
