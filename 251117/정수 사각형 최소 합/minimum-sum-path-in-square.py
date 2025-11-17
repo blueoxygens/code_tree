@@ -10,7 +10,6 @@ if n >= 2:
         dp[n-i-1][n-1] =  dp[n-i-2][n-1] + grid[n-i-1][n-1]
     for i in range(1, n):
         for j in range(n-2, -1, -1):
-            dp[i][j] = min(dp[i-1][j]+grid[i][j], dp[i][j-1]+grid[i][j])
+            dp[i][j] = min(dp[i-1][j]+grid[i][j], dp[i][j+1]+grid[i][j])
 
-for i in dp:
-    print(*i)
+print(dp[n-1][0])
