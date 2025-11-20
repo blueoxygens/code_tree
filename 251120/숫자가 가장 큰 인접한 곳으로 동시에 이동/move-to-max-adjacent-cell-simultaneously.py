@@ -1,3 +1,4 @@
+from collections import defaultdict
 n, m, t = map(int, input().split())
 
 # Create n x n grid
@@ -11,24 +12,28 @@ c = [pos[1] for pos in marbles]
 # Please write your code here.
 dirs = [(-1,0),(1,0),(0,-1),(0,1)] #상하좌우
 for time in range(t):
+    dd = defaultdict(list)
+    m = len(r)
     for i in range(m):
         mm = 0
         d = [0,0]
         for dr, dc in dirs:
-            nr, nc= r[i] + dr, c[i] + dc
+            nr = r[i] + dr
+            nc = c[i] + dc
             if 0<= nr-1 < n and 0<= nc-1 < n:
                 if a[nr-1][nc-1] > mm:
                     mm = a[nr-1][nc-1]
                     d[0], d[1] = nr, nc
         r[i], c[i] = d[0], d[1]
-dup = 0
-visited = set()
-duplist = set()
-for i in range(m):
-    if (r[i],c[i]) in visited:
-        dup += 1
-        duplist.add((r[i],c[i]))
-    else:
-        visited.add((r[i],c[i]))
-
-print(m-dup-len(duplist))
+        dd[(r[i],c[i])].append(i)
+    nr = []
+    nc = []
+    for items in dd:
+        arr = dd[items]
+        if len(arr) > 1:
+            continue
+        nr.append(items[0])
+        nc.append(items[1])
+    r = nr
+    c = nc
+print(len(r))
