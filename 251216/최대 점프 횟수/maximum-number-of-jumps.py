@@ -4,12 +4,13 @@ arr = list(map(int, input().split()))
 # Please write your code here.
 dp = [0]*n
 
-dp[0] = 1
-
 for i in range (n):
     if arr[i] > 0:
-        for j in range(1,arr[i]):
+        for j in range(1,arr[i]+1):
             k = i + j
-            if k < n and arr[k] > 0:
-                dp[k] = max(dp[k], dp[i]+1)
+            if k < n:
+                if i == 0:
+                    dp[k] = max(dp[k], dp[i]+1)
+                elif dp[i]>0:
+                    dp[k] = max(dp[k], dp[i]+1)
 print(max(dp))
