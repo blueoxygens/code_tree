@@ -9,4 +9,4 @@ for c in coin:
     for x in range(c, M + 1):
         dp[x] = min(dp[x], dp[x - c] + 1)
 
-print(dp[M])
+print(-1 if dp[M]==INF else dp[M])
