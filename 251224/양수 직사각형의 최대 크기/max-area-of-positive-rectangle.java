@@ -11,10 +11,10 @@ public class Main {
     static boolean checkRange(int x, int y, int w, int h){
         for(int i=x; i<x+h; i++){
             for(int j=y; j<y+w; j++){
-                if (grid[i][j] < 0){
+                if (grid[i][j] <= 0){
                     return false;
                 }
-                // System.out.print(i + " "  + j + "/");
+                // System.out.print(w + " "  + h + "/");
             }
             // System.out.println();
         }
