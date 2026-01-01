@@ -42,7 +42,7 @@ public class Main {
         }
 
         int maxSafeZones = 0;
-        int minK = 0;
+        int minK = 1;
 
         for (int k = 1; k < maxHeight; k++) {
             boolean[][] visited = new boolean[n][m];
@@ -61,6 +61,6 @@ public class Main {
             }
             maxSafeZones = Math.max(maxSafeZones, currentSafeZones);
         }
-        System.out.println(maxSafeZones!=0?maxSafeZones+ " " + minK:1 + " " + minK);
+        System.out.println(minK + " " + maxSafeZones);
     }
 }
