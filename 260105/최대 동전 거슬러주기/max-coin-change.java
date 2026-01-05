@@ -18,7 +18,7 @@ public class Main {
         }
         for(int i = 0; i<m; i++){
             for(int j = i+1; j<m+1; j++){
-                if(i+j < m+1){
+                if(i+j < m+1 && dp[i] != 0 && dp[j] != 0){
                     dp[i+j] = Math.max(dp[i+j], dp[i]+dp[j]);
                 }
             }
