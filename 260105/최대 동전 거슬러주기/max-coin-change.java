@@ -24,6 +24,6 @@ public class Main {
             }
         }
         // Arrays.stream(dp).forEach(System.out::print);
-        System.out.println(dp[m]);
+        System.out.println(dp[m]==0?-1:dp[m]);
     }
 }
