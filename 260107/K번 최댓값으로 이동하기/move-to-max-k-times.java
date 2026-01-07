@@ -29,8 +29,8 @@ public class Main {
         boolean[][] visited = new boolean[101][101];
         q.add(new int[] {r-1,c-1});
 
-        int ansr = 0;
-        int ansc = 0;
+        int ansr = r;
+        int ansc = c;
 
         while(!q.isEmpty()){
             int[] temp = q.pollFirst();
@@ -65,8 +65,8 @@ public class Main {
                 k--;
             }
             else{
-                ansr = temp[0];
-                ansc = temp[1];
+                ansr = temp[0]+1;
+                ansc = temp[1]+1;
                 break;
             }
         }
