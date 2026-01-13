@@ -26,7 +26,7 @@ public class Main {
             for(int[] v : d){
                 int nr = t[0] + v[0];
                 int nc = t[1] + v[1];
-                if(0<=nr && nr<n && 0<=nc && nc<n && !visited[nr][nc] && (grid[t[0]][t[1]] < grid[nr][nc])){
+                if(0<=nr && nr<=n && 0<=nc && nc<=n && !visited[nr][nc] && (grid[t[0]][t[1]] < grid[nr][nc])){
                     System.out.print(grid[nr][nc]+" ");
                     q.add(new int[] {nr,nc});
                     visited[nr][nc] = true;
