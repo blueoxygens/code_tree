@@ -1,41 +1,34 @@
 import java.util.*;
+
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
         int k = sc.nextInt();
         
-        Map <Integer, Character> m = new HashMap<>();
-        boolean[] b = new boolean[10000];
-        int end = 0;
-        int ans = 0;
+        int[] scores = new int[10001];
+        int maxPos = 0;
 
         for (int i = 0; i < n; i++) {
             int pos = sc.nextInt();
-            end = Math.max(end, pos);
-            char c = sc.next().charAt(0);
-            m.put(pos, c);
-            b[pos] = true;
+            char type = sc.next().charAt(0);
+            scores[pos] = (type == 'G') ? 1 : 2;
+            maxPos = Math.max(maxPos, pos);
         }
-        // Please write your code here.
 
-        for (int i = 1; i <= end-k+1; i++){
-            if(!b[i]){
-                continue;
+        int ans = 0;
+        int currentSum = 0;
+        
+        for (int i = 1; i <= maxPos; i++) {
+            currentSum += scores[i];
+            
+            if (i >= k+1) {
+                currentSum -= scores[i - k - 1];
             }
-            int s = 0;
-            for(int j = i; j <= i+k; j++){
-                if(!b[j]){
-                    continue;
-                }
-                if ('G' == m.get(j)){
-                    s += 1;
-                }else{
-                    s += 2;
-                }
-            }
-            ans = Math.max(s,ans);
+            
+            ans = Math.max(ans, currentSum);
         }
+
         System.out.println(ans);
     }
 }
