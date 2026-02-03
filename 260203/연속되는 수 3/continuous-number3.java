@@ -9,7 +9,6 @@ public class Main {
             arr[i] = sc.nextInt();
         
         // Please write your code here.
-        Arrays.sort(arr);
         // Arrays.stream(arr).forEach(num -> System.out.print(num+" "));
         int start = 0;
         int ans = 1;
