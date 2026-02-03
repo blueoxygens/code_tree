@@ -9,7 +9,7 @@ public class Main {
             arr[i] = sc.nextInt();
         }
         // Please write your code here.
-        int count = 1;
+        int count = 0;
         int temp = -1;
         int ans = 0;
         for(int i : arr){
@@ -22,6 +22,7 @@ public class Main {
                 count += 1;
                 }
         }
+        ans = Math.max(ans, count);
         System.out.println(ans);
     }
 }
