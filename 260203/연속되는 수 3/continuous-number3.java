@@ -21,6 +21,7 @@ public class Main {
                 start = d;
             }
         }
+        ans = Math.max(ans, d-start);
         System.out.println(ans);
     }
 }
