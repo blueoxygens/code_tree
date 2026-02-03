@@ -15,13 +15,12 @@ public class Main {
         int ans = 0;
         for(int d = 1; d < arr.length; d++){
             if(arr[start] * arr[d] > 0){
-                continue;
+                ans = Math.max(ans, d-start);
             }else{
                 ans = Math.max(ans, d-start);
                 start = d;
             }
         }
-        ans = Math.max(ans, d-start);
         System.out.println(ans);
     }
 }
