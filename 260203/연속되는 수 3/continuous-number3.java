@@ -12,12 +12,12 @@ public class Main {
         Arrays.sort(arr);
         // Arrays.stream(arr).forEach(num -> System.out.print(num+" "));
         int start = 0;
-        int ans = 0;
-        for(int d = 1; d < arr.length; d++){
+        int ans = 1;
+        for(int d = 1; d < n; d++){
             if(arr[start] * arr[d] > 0){
-                ans = Math.max(ans, d-start);
+                ans = Math.max(ans, d==0 ? d-start+1:d-start);
             }else{
-                ans = Math.max(ans, d-start);
+                ans = Math.max(ans, d==0 ? d-start+1:d-start);
                 start = d;
             }
         }
