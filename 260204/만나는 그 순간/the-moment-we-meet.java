@@ -6,60 +6,57 @@ public class Main {
         int n = sc.nextInt();
         int m = sc.nextInt();
         
-        // Please write your code here.
         char[] dirA = new char[n];
-        int [] secA = new int[n];
+        int[] secA = new int[n];
         char[] dirB = new char[m];
-        int [] secB = new int[m];
+        int[] secB = new int[m];
 
-        for (int i = 0; i < n; i++){
+        for (int i = 0; i < n; i++) {
             dirA[i] = sc.next().charAt(0);
             secA[i] = sc.nextInt();
         }
-        for (int i = 0; i < m; i++){
+        for (int i = 0; i < m; i++) {
             dirB[i] = sc.next().charAt(0);
             secB[i] = sc.nextInt();
         }
-        boolean flag = false;
-        int a = 0;
-        int b = 0;
-        int aIndex = 0;
-        int aSec = 0;
-        int bIndex = 0;
-        int bSec = 0;
-        int sec = 0;
-        while (!flag){
-            sec += 1;
-            aSec += 1;
-            bSec += 1;
-            if (aSec > secA[aIndex]){
-                aSec = 1;
-                aIndex += 1;
+
+        int aPos = 0, bPos = 0;
+        int aIdx = 0, bIdx = 0;
+        int aCurSec = 0, bCurSec = 0;
+        int time = 0;
+        int ans = -1;
+
+        while (aIdx < n || bIdx < m) {
+            time++;
+
+            if (aIdx < n) {
+                if (dirA[aIdx] == 'R') aPos++;
+                else aPos--;
+                
+                aCurSec++;
+                if (aCurSec == secA[aIdx]) {
+                    aCurSec = 0;
+                    aIdx++;
+                }
             }
-            if (bSec > secB[bIndex]){
-                bSec = 1;
-                bIndex += 1;
+
+            if (bIdx < m) {
+                if (dirB[bIdx] == 'R') bPos++;
+                else bPos--;
+                
+                bCurSec++;
+                if (bCurSec == secB[bIdx]) {
+                    bCurSec = 0;
+                    bIdx++;
+                }
             }
-            switch(dirA[aIndex]){
-                case 'R':
-                    a += 1;
-                    break;
-                case 'L':
-                    a -= 1;
-                    break;
-            }
-            switch(dirB[bIndex]){
-                case 'R':
-                    b += 1;
-                    break;
-                case 'L':
-                    b -= 1;
-                    break;
-            }
-            if (a == b){
-                flag = true;
+
+            if (aPos == bPos) {
+                ans = time;
+                break;
             }
         }
-        System.out.println(sec);
+
+        System.out.println(ans);
     }
 }
