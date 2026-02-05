@@ -10,3 +10,5 @@ for n in student:
     if s[n] >= K:
         print(n)
         break 
+else:
+    print(-1)
