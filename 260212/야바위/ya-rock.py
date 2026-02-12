@@ -13,7 +13,7 @@ def mix(key, a, b, c):
     else:
         t = key
 
-    if t != a and t == b:
+    if t == b:
         dic[key].append(a)
         if a == c:
             score[key] += 1
@@ -22,6 +22,7 @@ def mix(key, a, b, c):
         if b == c:
             score[key] += 1
     else:
+        dic[key].append(b)
         if t == c:
             score[key] += 1
 
