@@ -28,7 +28,7 @@ def mix(key, a, b, c):
 
 
 for i in range(n):
-    for k in list(dic.keys()):
+    for k in [1,2,3]:
         mix(k, a[i], b[i], c[i])
 
 print(max(score))
