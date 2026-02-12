@@ -22,7 +22,7 @@ def mix(key, a, b, c):
         if b == c:
             score[key] += 1
     else:
-        dic[key].append(b)
+        dic[key].append(t)
         if t == c:
             score[key] += 1
 
