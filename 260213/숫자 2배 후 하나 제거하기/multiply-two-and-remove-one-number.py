@@ -1,18 +1,24 @@
 n = int(input())
 arr = list(map(int, input().split()))
 
-# Please write your code here.
-ans = float('inf')
+answer = int(21e8)
+
 for i in range(n):
-    test = arr[:]
-    test[i] = 2*test[i]
-    for k in range(n):
-        dp = [0] * n
-        for j in range(n-1):
-            if k == j:
-                dp[j] = 0
-            else :
-                dp[j] = abs(test[j] - test[j+1])
-        ans = min(ans, sum(dp))
+    arr[i] *= 2
     
-print(ans)
+    for j in range(n):
+        temp = []
+        for k in range(n):
+            if j == k:
+                continue
+            temp.append(arr[k])
+        
+        total = 0
+        for k in range(len(temp) - 1):
+            total = total + abs(temp[k] - temp[k + 1])
+        
+        answer = min(answer, total)
+    
+    arr[i] //= 2
+
+print(answer)
