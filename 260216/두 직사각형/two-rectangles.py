@@ -6,5 +6,7 @@ a1, b1, a2, b2 = map(int, input().split())
 
 if x2 < a1 or a2 < x1:
     print("nonoverlapping")
+elif y2 < b1 or b2 < y1:
+    print("nonoverlapping")
 else:
     print("overlapping")
