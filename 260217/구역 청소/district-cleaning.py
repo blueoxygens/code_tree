@@ -1,20 +1,12 @@
 a, b = map(int, input().split())
 c, d = map(int, input().split())
 
-# Please write your code here.
+covered = [False] * 101
 
-section = [False] * 101
-count = 0
+for i in range(a, b):
+    covered[i] = True
 
-for i in range(a,b+1):
-    if not section[i]:
-        section[i] = True
-        count += 1
+for i in range(c, d):
+    covered[i] = True
 
-for i in range(c,d+1):
-    if not section[i]:
-        section[i] = True
-        count += 1
-
-# print(section)
-print(count-1)
+print(sum(covered))
