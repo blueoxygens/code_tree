@@ -13,8 +13,8 @@ for i in range(n):
         bits[j] |= (1<<i)
 
 
-for i in range(n):
-    if bits[j] == full:
+for i in range(101):
+    if bits[i] == full:
         print("Yes")
         break
 else:
