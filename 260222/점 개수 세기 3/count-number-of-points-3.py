@@ -10,7 +10,7 @@ for lb, hb in queries:
     start = 0
     while points[start] < lb:
         start += 1
-    end = q
+    end = n-1
     while points[end] > hb:
         end -= 1
     print(end - start + 1)
