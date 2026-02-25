@@ -1,16 +1,15 @@
-from collections import deque
 n = int(input())
 intervals = [tuple(map(int, input().split())) for _ in range(n)]
 
-# Please write your code here.
-rintervals =  sorted(intervals, key=lambda x: x[1])
-end = 0
-ans = 0
-for a, b in rintervals:
-    if a > end:
-        ans += 1
-        end  = b
-    else:
-        end = b
+# 시작점 기준 정렬
+intervals.sort()
 
-print(ans)
+merged = []
+for a, b in intervals:
+    if merged and merged[-1][1] >= a:
+        # 겹치면 합치기
+        merged[-1] = (merged[-1][0], max(merged[-1][1], b))
+    else:
+        merged.append((a, b))
+
+print(len(merged))
