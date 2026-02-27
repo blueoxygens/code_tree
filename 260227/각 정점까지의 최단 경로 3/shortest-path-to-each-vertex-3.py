@@ -20,7 +20,8 @@ while h:
         l = edge[num][i]
         if l > 0:
             if distance[i] > d + l:
-                h.remove((distance[i], i))
+                if (distance[i], i) in h:
+                    h.remove((distance[i], i))
                 heapq.heappush(h, (d+l, i))
                 distance[i] = d + l
 
