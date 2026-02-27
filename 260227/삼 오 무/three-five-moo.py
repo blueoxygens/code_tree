@@ -1,19 +1,19 @@
 n = int(input())
 
 # Please write your code here.
-def gcd (n,m):
-    a = n%m
-    if a == 0:
-        return m
-    else:
-        return gcd(n,a)
+# 8 -> 15당
 
-count = 0
-i = 0
-while count < n:
-    i += 1
-    if i % 3 ==0 or i % 5 == 0:
+i = n//8
+
+count = i*8
+ans = 0
+
+for j in range(i*15+1,i*15+16):
+    if j % 3 ==0 or j % 5 ==0:
         continue
     count += 1
+    if count == n:
+        ans = j
+        break
 
-print(i)
+print(ans)
