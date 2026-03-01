@@ -13,14 +13,20 @@ for _ in range(T):
         y.append(int(yi))
         d.append(di)
 
-    remain = set(range(M))  # deque → set으로 변경 (삭제 O(1))
+    remain = set(range(M))
+    seen_states = set()  # 상태 캐싱
 
     for _ in range(4 * N * N):
         if not remain:
             break
 
-        pos_dict = defaultdict(list)  # 위치 -> 구슬 목록
+        # 현재 상태 해싱
+        state = frozenset((x[i], y[i], d[i]) for i in remain)
+        if state in seen_states:
+            break  # 사이클 감지 → 더 이상 변화 없음
+        seen_states.add(state)
 
+        pos_dict = defaultdict(list)
         for i in remain:
             dx, dy = dirs[d[i]]
             nx, ny = x[i] + dx, y[i] + dy
@@ -32,9 +38,8 @@ for _ in range(T):
             x[i], y[i] = nx, ny
             pos_dict[(nx, ny)].append(i)
 
-        # 충돌 제거 — 한 번에 처리
-        for pos, indices in pos_dict.items():
+        for indices in pos_dict.values():
             if len(indices) >= 2:
-                remain -= set(indices)  # 충돌한 것만 제거
+                remain -= set(indices)
 
     print(len(remain))
