@@ -1,39 +1,87 @@
+# n, m 입력
 n, m = map(int, input().split())
-numbers = [int(input()) for _ in range(n)]
+# bombs 입력
+bombs = [
+    int(input())
+    for _ in range(n)
+]
 
-def compress(numbers):
-    tlist = []
-    i = 0
-    while i < n:
-        t = numbers[i]
-        count = 1
-        while i + count < n and t == numbers[i+count]:
-            count += 1
-        tlist.append((t, count))
-        i += count
-    return tlist
+# 함수들
+# get_eliminate_index(curr_bombs)
+def get_eliminate_index(curr_bombs):
 
-def merge(tlist):
-    merged = []
-    for item in tlist:
-        if merged and merged[-1][0] == item[0]:
-            merged[-1] = (merged[-1][0], merged[-1][1] + item[1])
+    # eliminate_index
+    eliminate_index = []
+
+    # cnt
+    cnt = 1
+
+    for i in range(len(curr_bombs) - 1):
+
+        # 불연속이고, cnt가 m 이상이면
+        if curr_bombs[i] != curr_bombs[i+1] and cnt >= m:
+            
+            # i에서 cnt 전부터 i까지의 인덱스를
+            for j in range(i - cnt + 1, i + 1):
+                # eliminate_index에 저장
+                eliminate_index.append(j)
+            # cnt 초기화
+            cnt = 1
+
+        # 불연속이고, cnt가 m이하면
+        if curr_bombs[i] != curr_bombs[i+1] and cnt < m:
+            # cnt 초기화
+            cnt = 1
+
+        # 연속이면
         else:
-            merged.append(item)
-    return merged
+            # cnt 올려주기
+            cnt += 1
 
-tlist = compress(numbers)
-
-while True:
-    # 한 루프에서 m 이상인 것 전부 제거
-    new_tlist = [(num, c) for num, c in tlist if c < m]
-    new_tlist = merge(new_tlist)  # 제거 후 인접 병합
+    # 남은 cnt가 m 이상이면
+    if cnt >= m:
+        # 마지막에서 cnt 전부터 마지막까지의 인덱스를
+        for i in range(len(curr_bombs) - cnt, len(curr_bombs)):
+            # eliminate_index에 추가
+            eliminate_index.append(i)
     
-    if new_tlist == tlist:  # 변화 없으면 종료
-        break
-    tlist = new_tlist
+    # 반환
+    return eliminate_index
 
-print(len(tlist))
-if len(tlist) != 0:
-    for num, c in tlist:
-        print(num)
+
+# 설계
+while True:
+    
+    # m이 1일 경우
+    if m == 1:
+        # 다터짐
+        print(0)
+        break
+
+    # m이 1이 아닐 경우
+    else:
+        # index_to_eleminate -> 터뜨려 줄 인덱스
+        index_to_eleminate = get_eliminate_index(bombs)
+
+        # 터뜨려 줄 인덱스가 없으면
+        if not len(index_to_eleminate):
+            # 출력
+            print(len(bombs))
+            for bomb in bombs:
+                print(bomb)
+            # 종료
+            break
+        
+        # 터뜨려 줄 인덱스가 있으면
+        else:
+            # temp_bombs
+            temp_bombs = []
+
+            for i in range(len(bombs)):
+                # 제거할 인덱스가 아니면,
+                if i not in index_to_eleminate:
+                    # temp_bombs에 추가
+                    temp_bombs.append(bombs[i])
+            
+            # bombs 바꿔주기
+            bombs = temp_bombs
