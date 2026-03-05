@@ -1,5 +1,5 @@
 a, b, c = map(int, input().split(" "))
 s =sum([a,b,c])
 print(s)
-print(s/3)
-print(s-s/3)
+print(int(s/3))
+print(int(s-s/3))
