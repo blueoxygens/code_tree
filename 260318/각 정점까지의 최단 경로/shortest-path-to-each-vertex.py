@@ -28,4 +28,4 @@ while heap:
 
 
 for i in range(1,n+1):
-    print(distance[i]) if distance[i] < math.inf else -1
+    print(distance[i]) if distance[i] < math.inf else print(-1)
