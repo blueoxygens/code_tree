@@ -6,8 +6,8 @@ parents = [i for i in range(n+1)]
 
 def find(x):
     if parents[x] != x:
-        return find(parents[x])
-    return x
+        parents[x] = find(parents[x])  # 경로 압축
+    return parents[x]
 
 def union(x,y):
 
