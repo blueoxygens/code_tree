@@ -24,7 +24,7 @@ for c, x, y in commands:
     if c == 0:
         union(x,y)
     else:
-        if parents[x] == parents[y]:
+        if find(x) == find(y):
             print(1)
         else:
             print(0)
