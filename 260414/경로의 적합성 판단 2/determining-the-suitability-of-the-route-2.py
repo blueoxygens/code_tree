@@ -17,9 +17,9 @@ def union (a,b):
     y = find(b)
 
     if x > y:
-        parent[a] = y
+        parent[x] = y
     else:
-        parent[b] = x
+        parent[y] = x
 
 for e1, e2 in edges:
     union(e1,e2)
