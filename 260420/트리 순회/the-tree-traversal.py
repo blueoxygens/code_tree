@@ -15,42 +15,39 @@ ind = []
 postd = []
 
 def inorder(root):
-    stack = deque()
-    stack.append(root)
-    visited = set()
-    visited.add(root)
+    stack = []
+    current = root
+
+    while current or stack:
+        # 왼쪽 끝까지 내려가며 push
+        while current and current != ".":
+            stack.append(current)
+            idx = ord(current) - ord("A")
+            current = left[idx]
+        
+        # 출력
+        current = stack.pop()
+        ind.append(current)
+        
+        # 오른쪽으로 이동
+        idx = ord(current) - ord("A")
+        current = right[idx]
+        if current == ".":
+            current = None
+
+def preorder(root):
+    stack = [root]
 
     while stack:
         ch = stack.pop()
         index = ord(ch) - ord("A")
-        if left[index] == "." or left[index] in visited:
-            ind.append(ch)
-            if right[index] != "." and right[index] not in visited:
-                stack.append(right[index])
-                visited.add(right[index])
-        else:
-            stack.append(ch)
+        pred.append(ch)  # 루트 먼저 기록
+        
+        # 오른쪽을 먼저 push해야 왼쪽이 먼저 pop됨
+        if right[index] != ".":
+            stack.append(right[index])
+        if left[index] != ".":
             stack.append(left[index])
-            visited.add(left[index])
-
-def preorder(root):
-    q = deque()
-    q.append(root)
-    visited = set()
-    visited.add(root)
-
-    while q:
-        ch = q.popleft()
-        index = ord(ch) - ord("A")
-        if left[index] == "." or left[index] in visited:
-            pred.append(ch)
-            if right[index] != "." and right[index] not in visited:
-                q.append(right[index])
-                visited.add(right[index])
-        else:
-            q.append(ch)
-            q.append(left[index])
-            visited.add(left[index])
 
 def postorder(root):
     if not root:
