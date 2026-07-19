@@ -1,25 +1,21 @@
 import java.util.*;
-import java.io.*;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringBuilder sb = new StringBuilder();
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
 
-        StringTokenizer st = new StringTokenizer(br.readLine());
-        int n = Integer.parseInt(st.nextToken());
-        int q = Integer.parseInt(st.nextToken());
+        int n = sc.nextInt();
+        int q = sc.nextInt();
 
         int[] cords = new int[n];
-        st = new StringTokenizer(br.readLine());
-        for (int i = 0; i < n; i++) cords[i] = Integer.parseInt(st.nextToken());
+        for (int i = 0; i < n; i++) cords[i] = sc.nextInt();
         Arrays.sort(cords);
 
-        // 좌표 -> 정렬 후 순위(1-based) 매핑은 굳이 Map 없이 이진탐색으로 처리
+        StringBuilder sb = new StringBuilder();
+
         for (int i = 0; i < q; i++) {
-            st = new StringTokenizer(br.readLine());
-            int l = Integer.parseInt(st.nextToken());
-            int u = Integer.parseInt(st.nextToken());
+            int l = sc.nextInt();
+            int u = sc.nextInt();
 
             int down = lowerBound(cords, l);   // l 이상 첫 인덱스
             int up = upperBound(cords, u) - 1; // u 이하 마지막 인덱스
@@ -30,7 +26,6 @@ public class Main {
         System.out.print(sb);
     }
 
-    // 첫 번째 원소 >= key
     static int lowerBound(int[] a, int key) {
         int lo = 0, hi = a.length;
         while (lo < hi) {
@@ -41,7 +36,6 @@ public class Main {
         return lo;
     }
 
-    // 첫 번째 원소 > key
     static int upperBound(int[] a, int key) {
         int lo = 0, hi = a.length;
         while (lo < hi) {
