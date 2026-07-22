@@ -11,12 +11,10 @@ public class Main {
         // 시간 복잡도 O(n)
         int[] arr = Arrays.stream(sc.nextLine().split(" ")).mapToInt(Integer::parseInt).toArray();
 
-        int left = 0;
         int sum = 0;
         int ans = Integer.MIN_VALUE;
         for(int right = 0; right<n; right++){
             if(sum < 0){
-                left = right;
                 sum = 0;
             }
             sum += arr[right];
